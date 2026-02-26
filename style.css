@@ -1,0 +1,140 @@
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 16px;
+}
+
+button, input {
+  font-size: 16px;
+  padding: 10px;
+}
+
+button { cursor: pointer; }
+
+.hidden { display: none; }
+
+.hint {
+  margin-top: 10px;
+  color: #666;
+  font-size: 13px;
+}
+
+.topBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.panelTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.wide { grid-column: 1 / -1; }
+
+#guessInput {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.article {
+  max-height: 60vh;
+  overflow: auto;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+/* Прибиваем выравнивание, чтобы Wiki-стили не ломали мобильный вид */
+.article, .article * { text-align: left !important; }
+
+.article h2, .article h3, .article h4 { margin: 12px 0 8px; }
+.article p { margin: 8px 0; }
+.article ul, .article ol { margin: 8px 0 8px 22px; }
+.article blockquote {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border-left: 3px solid #ddd;
+  background: #fff;
+}
+
+.muted { color: #666; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+/* Слова отображаются как обычный текст (либо маска, либо оригинал) */
+.word { display: inline; color: #111; }
+
+.word.hl {
+  background: #ffe08a;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+/* ===== Строка ввода ===== */
+.inputRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ПК — рядом */
+@media (min-width: 768px) {
+  .inputCol {
+    flex: 2;
+  }
+
+  .lastCol {
+    flex: 1;
+    min-width: 160px;
+  }
+}
+
+/* Телефон — 50/50 реально */
+@media (max-width: 767px) {
+  .inputRow {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;              /* чуть меньше, чтобы не съедать ширину */
+  }
+
+  .inputCol,
+  .lastCol {
+    flex: 1 1 0;           /* РЕАЛЬНО 50/50 */
+    min-width: 0;          /* критично для нормального сжатия */
+  }
+
+  #guessInput {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* компактнее заголовки в этой панели, чтобы не съедали место */
+  .inputRow .panelTitle {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  #lastInfo {
+    word-break: break-word;
+  }
+}
+
+.revealWrapper {
+  margin-top: 14px;
+  text-align: center;
+}
+
+#openBtn {
+  padding: 12px 20px;
+  font-size: 16px;
+}
