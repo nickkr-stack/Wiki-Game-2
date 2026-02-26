@@ -225,9 +225,6 @@ function normalizeForCompare(s) {
     .replace(/ё/g, "е");
 }
 
-function normalizeForCompare(s) {
-  return stripStressMarks(s).trim().toLowerCase();
-}
 
 let __unicodePropsOk = null;
 function isLetterOrDigit(ch) {
@@ -371,7 +368,7 @@ function renderCheckedTable() {
 function applyGuess(guessRaw) {
   if (!window.__gameDom) return;
 
-  const guess = (guessRaw || "").trim().toLowerCase();
+const guess = normalizeForCompare(guessRaw || "");
   if (!guess) return;
 
   const container = window.__gameDom;
