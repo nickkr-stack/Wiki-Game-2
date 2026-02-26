@@ -218,6 +218,10 @@ function stripStressMarks(s) {
     .normalize("NFC");
 }
 
+function yoToE(s) {
+  return (s || "").replace(/ё/g, "е").replace(/Ё/g, "Е");
+}
+
 function normalizeForCompare(s) {
   return stripStressMarks(s)
     .trim()
@@ -277,7 +281,7 @@ function buildGameDomFromCleanHtml(cleanHtml) {
   while (walker.nextNode()) textNodes.push(walker.currentNode);
 
   for (const node of textNodes) {
-const parts = tokenizeTextKeepPunct(stripStressMarks(node.nodeValue));
+const parts = tokenizeTextKeepPunct(yoToE(stripStressMarks(node.nodeValue)));
 
     const frag = document.createDocumentFragment();
     for (const part of parts) {
@@ -286,7 +290,7 @@ const parts = tokenizeTextKeepPunct(stripStressMarks(node.nodeValue));
       const isWord = [...part].every(isLetterOrDigit);
 
       if (isWord) {
-        const original = part;
+const original = yoToE(part);
 const lower = normalizeForCompare(original);
 
         const span = document.createElement("span");
@@ -480,3 +484,4 @@ try {
   if (newGameBtn2) newGameBtn2.style.display = "inline-block";
   if (openBtn) openBtn.style.display = "none";
 } catch (_) {}
+
